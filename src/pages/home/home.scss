@@ -1,5 +1,40 @@
 page-home {
-    html, body, .ion-app, .ion-content {
-        background-color: transparent;
+    #ionball {
+        position: absolute;
+        bottom: 30px;
+        left: calc(50% - 50px);
+        width: 100px;
+        height: 100px;
+        background-image: url("../assets/imgs/logo.png");
+    }
+    /* .camera-button{
+        position: absolute;
+        align-self: center; 
+        bottom: 10 dp;
+        left: calc(50% - 50px);
+        width: 100 dp;
+        height: 100 dp;
+    } */
+    .camera-init{
+        position: absolute;
+        left:50%;
+        top:50%
+
+    }
+    .cam{
+        width: 100 dp;
+        height: 100 dp;
+        //display: block;
+        position: absolute;
+        content: "";
+        background: url("../assets/imgs/square_shape.png");
+        opacity: 1;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;   
       }
-}
+   
+} 

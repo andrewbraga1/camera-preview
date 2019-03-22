@@ -6,6 +6,32 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  
+<ion-content >
+  <div class="camera-init" *ngIf="cameraState==false">
+    <button ion-button (click)="initCamera()">Camera</button>
+  </div>
+<div *ngIf="!picture">
+  <div  *ngIf="cameraState==true">
+    <div class="cam"></div>
+    <!-- <div id="ionball"></div> -->
+    <div class="shape"></div>
+    <!-- <div class="camera-button"> -->
+    <ion-fab center bottom small class="camera-button">  
+      <button ion-fab color="light" (click)="takePicture()"> <ion-icon name="radio-button-on"></ion-icon></button>
+    </ion-fab>
+    <!-- </div> -->
+
+      <ion-fab right top small>
+          <button ion-fab color="light"><ion-icon name="switch"></ion-icon></button>
+      </ion-fab>
+
+      <ion-fab left top small>
+          <button ion-fab color="light"><ion-icon name="exit"></ion-icon></button>
+      </ion-fab>
+
+      <ion-fab right bottom small>
+          <button (click)="refresh()" ion-fab color="light"><ion-icon name="archive"></ion-icon></button>
+      </ion-fab>
+  </div>
+</div>  
 </ion-content>

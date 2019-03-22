@@ -1,14 +1,22 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { CameraPreview, CameraPreviewPictureOptions, CameraPreviewOptions, CameraPreviewDimensions } from '@ionic-native/camera-preview';
+import { Platform } from 'ionic-angular';
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-picture:any;
-  constructor(public navCtrl: NavController,private cameraPreview: CameraPreview) {
-   this.initCamera()
+picture:any="";
+cameraState:Boolean = false;
+  constructor(platform: Platform,public navCtrl: NavController,private cameraPreview: CameraPreview) {
+    /* platform.ready().then(() => {
+      
+      // Okay, so the platform is ready and our plugins are available.
+      // Here you can do any higher level native things you might need.
+     
+    }); */
+    
   }
   
   // camera options (Size and location). In the following example, the preview uses the rear camera and display the preview in the back of the webview
@@ -24,25 +32,24 @@ initCamera(){
     toBack: true,
     alpha: 1
   };
-  
-  // start camera
+
+ // start camera
   this.cameraPreview.startCamera(cameraPreviewOpts).then(
     (res) => {
-      console.log(res)
+      this.cameraState = true
+      //alert(res)
     },
     (err) => {
       console.log(err)
-    });
-  
-  // Set the handler to run every time we take a picture
-  /* this.cameraPreview.setOnPictureTakenHandler().subscribe((result) => {
-    console.log(result);
-    // do something with the result
-  }); */
+      //alert("start: "+err)
+    }); 
+   
+
   
 }  
 
-takepicture(){
+ takepicture(){
+   alert("tirar foto")
   // picture options
   const pictureOpts: CameraPreviewPictureOptions = {
     width: 1280,
@@ -55,9 +62,10 @@ takepicture(){
     this.picture = 'data:image/jpeg;base64,' + imageData;
   }, (err) => {
     console.log(err);
-    this.picture = 'assets/img/test.jpg';
+    this.picture = 'assets/imgs/logo.png';
   });
 }  
+/*
 cameraSwitch(){  
   // Switch camera
   this.cameraPreview.switchCamera();
@@ -69,5 +77,7 @@ effect(){
 terminateCamera(){  
   // Stop the camera preview
   this.cameraPreview.stopCamera();
+}*/
+
 }
-}
+ 
