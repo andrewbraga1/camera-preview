@@ -1,0 +1,20 @@
+<!--
+  Generated template for the ImagepagePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar>
+    <ion-title>imagepage</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <button ion-button clear (click)="continue()">Use Photo</button>
+    <button ion-button clear (click)="back()">Retake</button>
+    <div *ngIf="picture">
+        {{image}}
+    </div> 
+      
+</ion-content>

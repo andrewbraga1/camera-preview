@@ -20,27 +20,7 @@ export class MyApp {
       statusBar.styleDefault();
       splashScreen.hide();
     });
-    /* const cameraPreviewOpts: CameraPreviewOptions = {
-      x: 0,
-      y: 0,
-      width: window.screen.width,
-      height: window.screen.height,
-      camera: 'rear',
-      tapPhoto: true,
-      previewDrag: true,
-      toBack: true,
-      alpha: 1
-    };
     
-    // start camera
-    this.cameraPreview.startCamera(cameraPreviewOpts).then(
-      (res) => {
-        alert(res)
-      },
-      (err) => {
-        console.log(err)
-        alert("start: "+err)
-      }); */
   }
 }
 
