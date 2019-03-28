@@ -8,7 +8,7 @@
 
 <ion-content class="background-color-transparent" >
    
-  
+<div *ngIf="!picture">  
   <div class="camera-init" *ngIf="cameraState==false">
     <button ion-button (click)="initCamera()">Camera</button>
   </div>
@@ -17,7 +17,7 @@
   </div> 
 
   
-<div *ngIf="!picture">
+
   <div  *ngIf="cameraState==true">
       
     <!-- <div class="cam"></div> -->
@@ -42,8 +42,10 @@
       </ion-fab>
   </div>
 </div> 
-<div *ngIf="picture">
-    {{image}}
+<div class = "photo" *ngIf="picture">
+  <button ion-button  clear (click)="cancel()">Cancelar</button>
+  <button ion-button clear (click)="use_photo()">Ok</button>
+ <img src ="{{picture}}">
 </div> 
 </ion-content>
 
