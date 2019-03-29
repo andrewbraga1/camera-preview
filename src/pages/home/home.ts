@@ -5,7 +5,9 @@ import { Platform } from 'ionic-angular';
 import { Component,ElementRef,ViewChild } from '@angular/core';
 import { ImagepagePage } from '../imagepage/imagepage';
 import { ToastController } from 'ionic-angular';
- // 'plug into' DOM canvas element using @ViewChild
+
+ 
+// 'plug into' DOM canvas element using @ViewChild
 
 @Component({
   selector: 'page-home',
@@ -24,7 +26,31 @@ cameraState:Boolean = false;
 confirm_photo:Boolean =false;
 
   constructor(platform: Platform,public navCtrl: NavController,private cameraPreview: CameraPreview,public toastCtrl: ToastController) {
-       
+    const cameraPreviewOpts: CameraPreviewOptions = {
+      x: 0,
+      y: 0,
+      width: window.screen.width,
+      height: window.screen.height,
+      camera: 'rear',
+      tapPhoto: true,
+      previewDrag: true,
+      toBack: true,
+      alpha: 1
+    };
+  
+   // start camera
+   
+    this.cameraPreview.startCamera(cameraPreviewOpts).then(
+      (res) => {
+        
+        this.cameraState = true
+        this.drawCircle();
+        
+      },
+      (err) => {
+        console.log(err)
+        confirm("Erro na câmera!")
+      });     
   }
 
   ionViewDidLoad(){
@@ -33,6 +59,8 @@ confirm_photo:Boolean =false;
     this._CANVAS.height 	= window.innerHeight  
     
     this.initialiseCanvas();
+    /* this.initCamera() */
+    
     
   }
   
@@ -45,6 +73,10 @@ confirm_photo:Boolean =false;
 
   setupCanvas(){
     this._CONTEXT = this._CANVAS.getContext('2d');
+  }
+
+  refresh(){
+    this.drawCircle()
   }
 
   drawCircle(){
@@ -75,7 +107,7 @@ initCamera(){
   };
 
  // start camera
-
+ 
   this.cameraPreview.startCamera(cameraPreviewOpts).then(
     (res) => {
       
@@ -85,9 +117,9 @@ initCamera(){
     },
     (err) => {
       console.log(err)
-      
+      confirm("Erro na câmera!")
     }); 
-   
+    
 }  
 
  takePicture(){
@@ -103,17 +135,20 @@ initCamera(){
   // take a picture
   this.cameraPreview.takePicture(pictureOpts).then((imageData) => {
     this.picture = 'data:image/jpeg;base64,' + imageData;
+    
+    //this._CANVAS.style.visibility="hidden";
     this.cameraPreview.hide();
-    this._CANVAS.style.visibility="hidden";
-    //this._CANVAS.style.display="none";
-    //this._CANVAS.style.opacity=0;
-    this.content.setElementStyle("background-color","white")
-    this.cameraState = false
+    //this._CANVAS.style.display="none"
+    this.content.setElementStyle("background-color","black")
+    //this.cameraState = false
+    
   }, (err) => {
     console.log(err);
-   
+    confirm("Erro na câmera!")
    
   });
+  this._CANVAS.style.display="none";
+  
   this.cameraState = false
 }  
 cancel(){
@@ -125,19 +160,21 @@ use_photo(){
   this.picture=""
   const toast = this.toastCtrl.create({
     message: 'Photo was added successfully',
-    duration: 3000
+    duration: 1500,
+    position: 'top'
   });
   toast.present();
  this.reset_camera_preview()
   
 }
 reset_camera_preview(){
+  this._CANVAS.style.display="block";
   this.picture=""
   this.cameraPreview.show()
-  this._CANVAS.style.visibility="visible";
+  //this._CANVAS.style.visibility="visible";
   //this._CANVAS.style.display="block";
   //this._CANVAS.style.opacity=1;
-  this.content.setElementStyle("background-color","white")
+  this.content.setElementStyle("background-color","transparent")
   this.cameraState= true
 }
 cameraSwitch(){  
@@ -151,7 +188,8 @@ effect(){
 terminateCamera(){  
   // Stop the camera preview
   this.cameraPreview.stopCamera();
-  this.cameraPreview.hide();
+  this.navCtrl.pop()
+  //this.cameraPreview.hide();
 }
  
   

@@ -22,7 +22,8 @@ import { ImagepagePage } from '../pages/imagepage/imagepage';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    ImagepagePage
   ],
   providers: [
     StatusBar,

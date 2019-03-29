@@ -1,33 +1,31 @@
-<ion-header>
+<!-- <ion-header *ngIf="cameraState==false"><!
   <ion-navbar>
     <ion-title>
       Ionic Blank
     </ion-title>
   </ion-navbar>
 </ion-header>
-
+ -->
 <ion-content class="background-color-transparent" >
-   
-<div *ngIf="!picture">  
-  <div class="camera-init" *ngIf="cameraState==false">
-    <button ion-button (click)="initCamera()">Camera</button>
-  </div>
-  <div class="ion-canvas" >
-      <canvas #canvas></canvas>
-  </div> 
+<div class="ion-canvas" >
+    <canvas #canvas></canvas>
+</div>   
+<div *ngIf="!picture">  <!--*ngIf="cameraState==false"  -->
 
   
-
+  <!-- Initialize camera thru button command
+    <div class="camera-init" *ngIf="cameraState==false">
+    <button ion-button (click)="initCamera()">Camera</button>
+  </div> -->
+  
   <div  *ngIf="cameraState==true">
-      
-    <!-- <div class="cam"></div> -->
-    <!-- <div id="ionball"></div> -->
+    
     <div class="shape"></div>
-    <!-- <div class="camera-button"> -->
-    <ion-fab center bottom small class="camera-button">  
+    
+    <ion-fab center bottom class="camera-button">  
       <button ion-fab color="light" (click)="takePicture()"> <ion-icon name="radio-button-on"></ion-icon></button>
     </ion-fab>
-    <!-- </div> -->
+    
 
       <ion-fab right top small>
           <button ion-fab color="light" (click)="cameraSwitch()"><ion-icon name="switch"></ion-icon></button>
@@ -42,11 +40,11 @@
       </ion-fab>
   </div>
 </div> 
-<div class = "photo" *ngIf="picture">
-  <button ion-button  clear (click)="cancel()">Cancelar</button>
-  <button ion-button clear (click)="use_photo()">Ok</button>
- <img src ="{{picture}}">
-</div> 
+<div class ="back" *ngIf="picture">
+  <button ion-button clear style="float:left" (click)="cancel()">Cancelar</button>
+  <button ion-button clear style="float:right"(click)="use_photo()">Ok</button>
+ <img class = "photo" src ="{{picture}}">
+</div>
 </ion-content>
-
+ 
   

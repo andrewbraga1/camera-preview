@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the ImagepagePage page.
@@ -16,7 +17,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 export class ImagepagePage {
 image:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.image = navParams.get('image');
+    
   }
 
   ionViewDidLoad() {
@@ -26,7 +27,7 @@ image:any;
     this.navCtrl.pop();
   }
   continue(){
-    
+    this.navCtrl.push(HomePage)
   }
 
 }
